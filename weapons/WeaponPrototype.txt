@@ -18,7 +18,7 @@ WeaponClass.weaponName = "WeaponName"
 --- The color of the text in the sidebar.
 WeaponClass.weaponColor = { 255, 0, 0 }
 
-local kd = love.keyboard.isDown -- A small shortcut to this crucial functino
+local kd = love.keyboard.isDown -- A small shortcut to this crucial function
 
 --- Called on update to the game.
 -- @param dt The amount of time in seconds to update the weapon by
