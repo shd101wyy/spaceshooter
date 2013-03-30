@@ -172,9 +172,9 @@ function love.draw()
 
 
  -- update laser according to score
-    if score<=10 then
+    if score<=100 then
        laser_level=1
-    elseif score>10 and score<400 then
+    elseif score>100 and score<400 then
        laser_level=2
     else
        laser_level=3
