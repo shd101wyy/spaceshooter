@@ -2,7 +2,7 @@ require "Projectile"
 
 -- Definition of the laser beam projectile class
 local LaserBeam = class(Actor,
-    function(self, x, y, vel_x)
+    function(self, x, y, vel_x) -- additional argument determing the x velocity
         Actor.init(self)
         self.x = x
         self.y = y
@@ -50,11 +50,11 @@ function LaserClass:update(dt)
     if kd("w") then
         self.cooloff = self.cooloff + dt
         while self.cooloff >= 0 do
-            if laser_level == 1 then
+            if laser_level == 1 then -- level 1: Original single straight beam
                 local laser = LaserBeam(player.x, player.y, 0)
                 addActor(laser)
                 laser:update(self.cooloff)
-            elseif laser_level == 2 then
+            elseif laser_level == 2 then -- level 2: Three parallel beam
                 local laserM = LaserBeam(player.x, player.y, 0)
                 local laserL = LaserBeam(player.x - 30, player.y, 0)
                 local laserR = LaserBeam(player.x + 30, player.y, 0)
@@ -64,7 +64,7 @@ function LaserClass:update(dt)
                 laserM:update(self.cooloff)
                 laserL:update(self.cooloff)
                 laserR:update(self.cooloff)
-            else
+            else -- level 3: Powerful 3-way beam
                 local laserM = LaserBeam(player.x, player.y, 0)
                 local laserL = LaserBeam(player.x, player.y, -300)
                 local laserR = LaserBeam(player.x, player.y, 300)
