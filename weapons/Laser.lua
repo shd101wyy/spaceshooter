@@ -29,11 +29,9 @@ function  LaserBeam:draw()
         love.graphics.setColor(255, 0, 0, 255)
         love.graphics.rectangle("fill", self.x - 5, self.y - 5, 10, 10)
         love.graphics.setColor(255, 255, 255, 255)
-    else
+    elseif laser_level=2 then
         love.graphics.setColor(255, 0, 0, 255)
         love.graphics.rectangle("fill", self.x - 5, self.y - 5, 10, 10)
-        love.graphics.rectangle("fill", self.x - 20, self.y - 5, 10, 10)
-        love.graphics.rectangle("fill", self.x + 15, self.y - 5, 10, 10)
         love.graphics.setColor(255, 255, 255, 255)
     end
 end

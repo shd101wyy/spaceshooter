@@ -34,7 +34,7 @@ local function makeMeteor()
     meteor.y = -64
     meteor.x = math.random(0, arenaWidth)
     meteor.vel_x = 0
-    meteor.vel_y = 100 + math.random(-20, 20)
+    meteor.vel_y = 400 + math.random(-20, 20)
     meteor.time = math.random(0, 99)
     meteor.frameRate = math.random(24, 100)
     meteor.getBB = meteorGetBB
@@ -44,7 +44,7 @@ end
 
 function MeteorClass:update(dt)
     -- Random chance that a new meteor appears.
-    if math.random() < 0.002 then
+    if math.random() < 0.02 then
         local newMeteor = makeMeteor()
         self.spriteGroup:addSprite(newMeteor)
         addTarget(newMeteor)
