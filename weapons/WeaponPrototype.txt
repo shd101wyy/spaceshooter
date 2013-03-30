@@ -1,0 +1,25 @@
+require "Projectile"
+
+--- A prototype of all things the weapon classes have to implement
+-- Each weapon have these fields to work.
+-- @class table
+-- @name WeaponClass
+WeaponClass = { hello = true }
+
+--- The order in which the weapon appears in the sidebar. The weapons are sorted in ascending order.
+WeaponClass.weaponOrder = 0
+
+--- The name of the weapon in the sidebar.
+WeaponClass.weaponName = "WeaponName"
+
+--- The color of the text in the sidebar.
+WeaponClass.weaponColor = { 255, 0, 0 }
+
+---
+function WeaponClass:update(dt)
+    if kd("w") then
+        -- Weapon Firing Code
+    end
+end
+
+return WeaponClass
