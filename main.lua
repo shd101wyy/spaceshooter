@@ -70,6 +70,11 @@ function love.keypressed(key)
 	       weapon_mode="laser"
 	    end
 	 end
+
+	 if can_gg==true and key=="y" then
+	    can_gg=false
+	    life={"*","*","*","*","*"}
+	 end
 end
 
 --======================================
@@ -186,6 +191,19 @@ function love.draw()
        love.graphics.setFont(guiFont)
        love.graphics.setColor(255, 255, 255, 255)
        love.graphics.print("GAME OVER",arenaWidth/2,arenaWidth/2)
+       
+       print("Want to TRY AGAIN???? MAN?")
+       love.graphics.setFont(guiFont)
+       love.graphics.setColor(255, 255, 255, 255)
+       love.graphics.print("Want to TRY AGAIN???? MAN?",arenaWidth/2,arenaWidth/2+50)
+
+       print("Press Y to restart!!!!")
+       love.graphics.setFont(guiFont)
+       love.graphics.setColor(255, 255, 255, 255)
+       love.graphics.print("Press Y to restart!!!!",arenaWidth/2,arenaWidth/2+100)
+       
+       
+       
     end
 
 
