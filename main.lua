@@ -64,7 +64,7 @@ can_gg=false
 function love.keypressed(key)
 	 if key=="tab" then
 	    print("Press Tab")
-	    if weapon_mode="laser" then
+	    if weapon_mode=="laser" then
 	       weapon_mode="bomb"
 	    else
 	       weapon_mode="laser"
