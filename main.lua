@@ -56,9 +56,8 @@ table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrde
 -- my code here
 life={"*","*","*","*","*"}
 weapon_mode="laser"
--- life={"*",arenaWidth/2,arenaHeight/2}
 can_gg=false
-
+laser_level=1
 
 
 function love.keypressed(key)
@@ -116,10 +115,11 @@ function love.update(dt)
       can_gg=true
     end
 
-
-    for _,actor in ipairs(actors) do
-        if actor then
-            actor:update(dt)
+    if can_gg==false then
+        for _,actor in ipairs(actors) do
+            if actor then
+                actor:update(dt)
+            end
         end
     end
 end
@@ -171,6 +171,15 @@ function love.draw()
     end
 
 
+ -- update laser according to score
+    if score<=200 then
+       laser_level=1
+    elseif score>200 and score<400 then
+       laser_level=2
+    else
+       laser_level=3
+
+
  -- Draw the life label
     love.graphics.setFont(guiFont)
     love.graphics.setColor(255, 255, 255, 255)
@@ -189,6 +198,10 @@ function love.draw()
 
     -- check gg
     if can_gg==true then
+    
+       -- reset laser level
+       laser_level=1
+	
        print("GAME OVER")
        love.graphics.setFont(guiFont)
        love.graphics.setColor(255, 255, 255, 255)
