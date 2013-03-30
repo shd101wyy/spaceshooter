@@ -51,9 +51,10 @@ weaponClasses = { }
 loadLibrary("weapons", weaponClasses)
 table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrder end)
 
-
+-- new code here
 --======================================
--- my code here
+--require "./UFO.lua"
+
 life={"*","*","*","*","*"}
 weapon_mode="laser"
 can_gg=false
@@ -81,6 +82,8 @@ end
 --======================================
 
 function love.load()
+
+
     -- Load fonts
     debugFont = love.graphics.newFont(12)
     guiFont = love.graphics.newFont("gui_font.ttf", 32)
@@ -102,15 +105,25 @@ function love.load()
     addActor(weapon)
 
     audioSource = love.audio.newSource("hdl.mp3")
-	 love.audio.setVolume(2.0)
-   	  love.audio.play(audioSource)
+    love.audio.setVolume(2.0)
+    love.audio.play(audioSource)
 
+     -- new code here by PODH
+    
+     UFO_load()
+
+    -------------------------------------
 end
 
 
 
 
 function love.update(dt)
+
+    -- new code by PODH
+       UFO_update(dt)
+    -------------------
+
     if #life==0 then
       can_gg=true
     end
@@ -125,6 +138,12 @@ function love.update(dt)
 end
 
 function love.draw()
+
+    -- new code here by PODH
+    UFO_draw()
+    ------------------------
+
+
     -- Draw all the actors
     love.graphics.push()
     love.graphics.translate(displayWidth, 0)
