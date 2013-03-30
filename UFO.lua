@@ -1,15 +1,16 @@
 function UFO_update(dt)
-	 print("UFO_update")
 	 for i,v in ipairs(ufo_group) do
-	     v.x=v.x+dt*v.velocity
+	     v.x=v.x+dt*v.velocity*math.random(1,2)
 	     if v.x>=arenaWidth then
+	         v.velocity=-v.velocity
+	     end
+	     if v.x<=displayWidth then
 	         v.velocity=-v.velocity
 	     end
 	 end
 end
 
 function UFO_load()
-	 print("UFO_load")
 	 ufo_group={}
 
 	
@@ -17,11 +18,18 @@ function UFO_load()
 	 ufo_height=10
 	 for i=1,4 do
 	     	 ufo={}
-        	 ufo.x=math.random(0,arenaWidth)
-		 ufo.y=100
+        	 ufo.x=math.random(0,arenaWidth)+displayWidth
+		 while ufo.x>=arenaWidth-10 do
+		    ufo.x=math.random(0,arenaWidth)+displayWidth
+		 end
+		 ufo.y=50
 	         ufo.width=ufo_width
 	         ufo.height=ufo_height
 		 ufo.velocity=100
+		 local temp=math.random(0,1)
+		 if temp<0.5 then
+		    ufo.velocity=-1*ufo.velocity
+		 end
 		 table.insert(ufo_group,ufo)
 	 end
 end
@@ -53,11 +61,9 @@ function love.graphics.ellipse(mode, x, y, a, b, phi, points)
 end
 
 function UFO_draw()
-	 print("UFO_draw")
 	 for i,v in ipairs(ufo_group) do
-	     print("DRAW HERE")
 	     --love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
-  love.graphics.ellipse( "fill", 400, 300, 100,100)
+  love.graphics.ellipse( "fill", v.x, v.y, v.width,v.height,10,100)
 
 	     --love.graphics.draw(ufo_picture,v.x,v.y,v.width,v.height)
 	 end

@@ -75,6 +75,8 @@ function love.keypressed(key)
 
 	 if can_gg==true and key=="y" then
 	    can_gg=false
+	    score=0
+	    laser_level=1
 	    life={"*","*","*","*","*"}
 	 end
 end
@@ -106,6 +108,7 @@ function love.load()
 
     audioSource = love.audio.newSource("hdl.mp3")
     love.audio.setVolume(2.0)
+    audioSource:setLooping(true)
     love.audio.play(audioSource)
 
      -- new code here by PODH
