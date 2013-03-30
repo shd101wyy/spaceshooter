@@ -57,7 +57,7 @@ table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrde
 life={"*","*","*","*","*"}
 weapon_mode="laser"
 can_gg=false
-laser_level=1
+laser_level=2
 
 
 function love.keypressed(key)
@@ -178,7 +178,7 @@ function love.draw()
        laser_level=2
     else
        laser_level=3
-
+    end
 
  -- Draw the life label
     love.graphics.setFont(guiFont)
