@@ -20,6 +20,8 @@ function loadLibrary(folder, libTable)
     end
 end
 
+
+
 loadLibrary("core")
 loadLibrary("")
 
@@ -50,11 +52,27 @@ loadLibrary("weapons", weaponClasses)
 table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrder end)
 
 
+--======================================
 -- my code here
 life={"*","*","*","*","*"}
+weapon_mode="laser"
 -- life={"*",arenaWidth/2,arenaHeight/2}
 can_gg=false
 
+
+
+function love.keypressed(key)
+	 if key=="tab" then
+	    print("Press Tab")
+	    if weapon_mode="laser" then
+	       weapon_mode="bomb"
+	    else
+	       weapon_mode="laser"
+	    end
+	 end
+end
+
+--======================================
 
 function love.load()
     -- Load fonts
