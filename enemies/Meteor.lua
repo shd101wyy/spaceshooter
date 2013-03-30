@@ -1,5 +1,6 @@
 local MeteorClass = class(Actor,
     function(self)
+        Actor.init(self)
         local meteorAtlas = love.graphics.newImage("sprites.png")
         self.spriteGroup = SpriteGroup(meteorAtlas, 10)
     end
@@ -14,14 +15,16 @@ local function meteorGetBB(self)
     return bb
 end
 
-local function meteorDamage(self, point_x, point_y, velocity_x, velocity_y, damageAmount)
-    self.vel_y = self.vel_y / 1.01
+local function meteorDamage(self, point_x, point_y, damageAmount)
+    self.vel_y = self.vel_y / 0.99
     self.health = self.health - damageAmount
     if self.health <= 0 then
+        -- Upon death the sprite is moved some place unreachable. It's impossible to remove sprites
+        -- from a sprite group.
         self.x = -1000
         self.y = -1000
         score = score + 10
-        removeTarget(self.__target_id)
+        removeTarget(self)
     end
 end
 
@@ -40,6 +43,7 @@ local function makeMeteor()
 end
 
 function MeteorClass:update(dt)
+    -- Random chance that a new meteor appears.
     if math.random() < 0.01 then
         local newMeteor = makeMeteor()
         self.spriteGroup:addSprite(newMeteor)
@@ -48,6 +52,10 @@ function MeteorClass:update(dt)
     for _,meteor in ipairs(self.spriteGroup.sprites) do
         meteor.x = meteor.x + meteor.vel_x * dt
         meteor.y = meteor.y + meteor.vel_y * dt
+	
+	if meteor.y >= player.y then
+	   print("METEOR IS BELOW SHIP")
+	end
     end
     self.spriteGroup:update(dt)
 end

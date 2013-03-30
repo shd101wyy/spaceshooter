@@ -1,3 +1,4 @@
+-- THIS IS THE PLANE
 Player = class(Actor,
     function(self)
         Actor.init(self)
@@ -13,33 +14,25 @@ Player = class(Actor,
     end
 )
 
--- local cooloffs = {}
--- function cooloff(token, id, dt, time)
---     if cooloffs[token] == nil then
---         cooloffs[token] = {}
---     end
---     if cooloffs[token][id] == nil or cooloffs[token][id] <= 0 then
---         cooloffs[token][id] = time
---         return true
---     end
---     cooloffs[token][id] = cooloffs[token][id] - dt
---     return false
--- end
-
 local kd = love.keyboard.isDown
 function Player:update(dt)
+    -- Check movement keys
     if kd("a") then
         self.x = self.x - self.moveSpeed * dt
+        self.targetTiltAngle = -45
+
+        -- Ensure we don't fall off the screen
         if self.x - self.width / 2 < 0 then
             self.x = self.width / 2
         end
-        self.targetTiltAngle = -45
     elseif kd("d") then
         self.x = self.x + self.moveSpeed * dt
+        self.targetTiltAngle = 45
+
+        -- Ensure we don't fall off the screen
         if self.x + self.width / 2 > arenaWidth then
             self.x = arenaWidth - self.width / 2
         end
-        self.targetTiltAngle = 45
     else
         self.targetTiltAngle = 0
     end

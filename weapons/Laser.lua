@@ -1,8 +1,9 @@
 require "Projectile"
 
+-- Definition of the laser beam projectile class
 local LaserBeam = class(Actor,
     function(self, x, y)
-        Actor.init()
+        Actor.init(self)
         self.x = x
         self.y = y
         self.vel_x = 0
@@ -13,20 +14,24 @@ local LaserBeam = class(Actor,
 function LaserBeam:update(dt)
     self.x = self.x + self.vel_x * dt
     self.y = self.y + self.vel_y * dt
+
+    -- Remove this laser beam when it gets to far up.
     if self.y < -100 then
         self:remove()
     end
-    if damageTarget(self.x, self.y, self.vel_x, self.vel_y, 1) then
+    if damageTarget(self.x, self.y, 1) then
         self:remove()
     end
 end
 
-function  LaserBeam:draw(x, y, age)
+function  LaserBeam:draw()
     love.graphics.setColor(255, 0, 0, 255)
     love.graphics.rectangle("fill", self.x - 5, self.y - 5, 10, 10)
     love.graphics.setColor(255, 255, 255, 255)
 end
+---
 
+-- Definition of the laser weapon class
 local LaserClass = class(Actor,
     function(self)
         Actor.init(self)
@@ -39,7 +44,7 @@ LaserClass.weaponName = "Laser++"
 LaserClass.weaponColor = { 255, 0, 0 }
 LaserClass.fireRate = 0.05
 
-local kd = love.keyboard.isDown
+local kd = love.keyboard.isDown -- A small shortcut to this crucial functino
 
 function LaserClass:update(dt)
     if kd("w") then
@@ -50,6 +55,8 @@ function LaserClass:update(dt)
             laser:update(self.cooloff)
             self.cooloff = self.cooloff - self.fireRate
         end
+    elseif kd("q") then
+       print("q")
     else
         self.cooloff = 0
     end

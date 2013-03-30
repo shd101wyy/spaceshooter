@@ -4,8 +4,11 @@ require "Projectile"
 -- Each weapon have these fields to work.
 -- @class table
 -- @name WeaponClass
-WeaponClass = { hello = true }
-
+WeaponClass = class(Actor,
+    function(self)
+        Actor.init(self)
+    end
+)
 --- The order in which the weapon appears in the sidebar. The weapons are sorted in ascending order.
 WeaponClass.weaponOrder = 0
 
@@ -15,7 +18,10 @@ WeaponClass.weaponName = "WeaponName"
 --- The color of the text in the sidebar.
 WeaponClass.weaponColor = { 255, 0, 0 }
 
----
+local kd = love.keyboard.isDown -- A small shortcut to this crucial functino
+
+--- Called on update to the game.
+-- @param dt The amount of time in seconds to update the weapon by
 function WeaponClass:update(dt)
     if kd("w") then
         -- Weapon Firing Code
