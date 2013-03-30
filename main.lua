@@ -1,3 +1,4 @@
+--- E HE
 --- Library Loading Code
 -- Loads each lua file in a given folder using require.
 -- If libTable is given, the modules' return values is inserted into it.
@@ -87,10 +88,10 @@ end
 
 function love.update(dt)
     if #life==0 then
-      can_gg=true 
+      can_gg=true
     end
 
-	 
+
     for _,actor in ipairs(actors) do
         if actor then
             actor:update(dt)
@@ -166,7 +167,7 @@ function love.draw()
        print("GAME OVER")
        love.graphics.setFont(guiFont)
        love.graphics.setColor(255, 255, 255, 255)
-       love.graphics.print("GAME OVER",arenaWidth/2,arenaWidth/2)	 
+       love.graphics.print("GAME OVER",arenaWidth/2,arenaWidth/2)
     end
 
 
