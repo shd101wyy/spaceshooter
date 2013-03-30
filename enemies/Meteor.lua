@@ -61,7 +61,7 @@ function MeteorClass:update(dt)
 
 
 	-- check collision
-	if bb.max_y >= player.y and bb.min_x<player.x and bb.max_x>player.x and bb.min_y<=player.y and can_gg=false then
+	if bb.max_y >= player.y and bb.min_x<player.x and bb.max_x>player.x and bb.min_y<=player.y and can_gg==false then
 	   print("METEOR IS BELOW SHIP")
 	   table.insert(removeMeteor,_)
 	   --explosion_mp3=love.audio.newSource("explosion.mp3")
