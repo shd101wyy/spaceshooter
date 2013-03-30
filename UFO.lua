@@ -1,11 +1,14 @@
+
 function UFO_update(dt)
 	 for i,v in ipairs(ufo_group) do
 	     v.x=v.x+dt*v.velocity*math.random(1,2)
 	     if v.x>=arenaWidth then
 	         v.velocity=-v.velocity
+		 v.x=v.x-10
 	     end
 	     if v.x<=displayWidth then
 	         v.velocity=-v.velocity
+		 v.x=v.x+10
 	     end
 	 end
 end
@@ -62,9 +65,12 @@ end
 
 function UFO_draw()
 	 for i,v in ipairs(ufo_group) do
-	     --love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
-  love.graphics.ellipse( "fill", v.x, v.y, v.width,v.height,10,100)
 
-	     --love.graphics.draw(ufo_picture,v.x,v.y,v.width,v.height)
+	      love.graphics.setColor(126,161,181,255)
+	      love.graphics.ellipse( "fill", v.x+10, v.y-10, v.width/2,v.height/2,10,100)
+	      love.graphics.setColor(219,219,219,255)
+	      love.graphics.ellipse( "fill", v.x, v.y, v.width,v.height,10,100)
+	      
 	 end
+
 end

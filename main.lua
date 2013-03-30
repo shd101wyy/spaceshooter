@@ -112,8 +112,9 @@ function love.load()
     love.audio.play(audioSource)
 
      -- new code here by PODH
+
+      UFO_load()
     
-     UFO_load()
 
     -------------------------------------
 end
@@ -124,7 +125,9 @@ end
 function love.update(dt)
 
     -- new code by PODH
+    if score>=200 then
        UFO_update(dt)
+    end
     -------------------
 
     if #life==0 then
@@ -142,9 +145,6 @@ end
 
 function love.draw()
 
-    -- new code here by PODH
-    UFO_draw()
-    ------------------------
 
 
     -- Draw all the actors
@@ -258,4 +258,12 @@ function love.draw()
         love.graphics.print("Free Actors: " .. (#actors.free),                        0, debugFontHeight * 2)
         love.graphics.print("Targets: " .. (#targets),                                0, debugFontHeight * 3)
     end
+
+
+      -- new code here by PODH
+    if score>=200 then
+      UFO_draw()
+    end
+    ------------------------
+
 end
