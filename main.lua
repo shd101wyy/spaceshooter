@@ -49,6 +49,12 @@ loadLibrary("weapons", weaponClasses)
 table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrder end)
 
 
+-- my code here
+life={"*","*","*","*","*"}
+-- life={"*",arenaWidth/2,arenaHeight/2}
+can_gg=false
+
+
 function love.load()
     -- Load fonts
     debugFont = love.graphics.newFont(12)
@@ -80,6 +86,11 @@ end
 
 
 function love.update(dt)
+    if #life==0 then
+      can_gg=true 
+    end
+
+	 
     for _,actor in ipairs(actors) do
         if actor then
             actor:update(dt)
@@ -143,12 +154,22 @@ function love.draw()
     -- because of \n\n above, so do it twice
     y = y + guiFont:getHeight()
     y = y + guiFont:getHeight()
-    life={"*","*","*","*","*"}
     life_string="";
     for i,v in ipairs(life) do
     	life_string=life_string..v.." "
     end
     love.graphics.print(life_string,margin,y)
+
+
+    -- check gg
+    if can_gg==true then
+       print("GAME OVER")
+       love.graphics.setFont(guiFont)
+       love.graphics.setColor(255, 255, 255, 255)
+       love.graphics.print("GAME OVER",arenaWidth/2,arenaWidth/2)	 
+    end
+
+
 
 
     love.graphics.setColor(255, 255, 255, 255)

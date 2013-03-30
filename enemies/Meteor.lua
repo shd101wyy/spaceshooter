@@ -34,7 +34,7 @@ local function makeMeteor()
     meteor.y = -64
     meteor.x = math.random(0, arenaWidth)
     meteor.vel_x = 0
-    meteor.vel_y = 100 + math.random(-20, 20)
+    meteor.vel_y = 500 + math.random(-20, 20)
     meteor.time = math.random(0, 99)
     meteor.frameRate = math.random(24, 100)
     meteor.getBB = meteorGetBB
@@ -49,14 +49,37 @@ function MeteorClass:update(dt)
         self.spriteGroup:addSprite(newMeteor)
         addTarget(newMeteor)
     end
+
+
+    local removeMeteor={}
+
     for _,meteor in ipairs(self.spriteGroup.sprites) do
         meteor.x = meteor.x + meteor.vel_x * dt
         meteor.y = meteor.y + meteor.vel_y * dt
-	
-	if meteor.y >= player.y then
+
+	local bb=meteor:getBB()	
+
+
+	-- check collision
+	if bb.max_y >= player.y and bb.min_x<player.x and bb.max_x>player.x and bb.min_y<=player.y and can_gg=false then
 	   print("METEOR IS BELOW SHIP")
+	   table.insert(removeMeteor,_)
+	   --explosion_mp3=love.audio.newSource("explosion.mp3")
+	   --explosion_mp3:setLooping(false)
+	   --love.audio.play(explosion_mp3)
+
+	   -- remove meteor
+	   meteor.x=-10000
+	   meteor.y=-10000
+
+	   print("life"..#life)
+	   table.remove(life,#life)
 	end
+    
+
+
     end
+    
     self.spriteGroup:update(dt)
 end
 
