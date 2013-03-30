@@ -69,6 +69,8 @@ function love.keypressed(key)
 	    else
 	       weapon_mode="laser"
 	    end
+	 elseif key=="escape" then
+	 	os.exit()
 	 end
 
 	 if can_gg==true and key=="y" then
