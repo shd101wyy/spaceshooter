@@ -58,9 +58,13 @@ function LaserClass:update(dt)
     if kd("w") then
         self.cooloff = self.cooloff + dt
         while self.cooloff >= 0 do
-            local laser = LaserBeam(player.x, player.y)
-            addActor(laser)
-            laser:update(self.cooloff)
+            local laserM = LaserBeam(player.x, player.y)
+            local laserL = LaserBeam(player.x - 50, player.y)
+            local laserR = LaserBeam(player.x + 50, player.y)
+            addActor(laserM)
+            addActor(laserL)
+            addActor(laserR)
+            laserM:update(self.cooloff)
             self.cooloff = self.cooloff - self.fireRate
         end
     elseif kd("q") then
