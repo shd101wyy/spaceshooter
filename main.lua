@@ -249,8 +249,8 @@ function love.draw()
     y = y + 2*guiFont:getHeight()
     --finalY = y + 2 * guiFont:getHeight()
     
-    love.graphics.print("space->shoot\nUp->up\nDown->down\nLeft->left\nright->right\n", margin, y)
-    finalY = y + 6 * guiFont:getHeight()
+    love.graphics.print("space->shoot\nUp->up\nDown->down\nLeft->left\nright->right\nTAB->WEAPON\n  CHANGE", margin, y)
+    finalY = y + 9 * guiFont:getHeight()
 
     
 
