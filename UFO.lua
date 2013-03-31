@@ -3,6 +3,8 @@ remove_ufo_num=0
 max_ufo_num=8
 ufo_can_move_down=false
 ufo_have_shot=false
+ufo_life=30
+ufo_level=1
 
 
 function UFO_update(dt)
@@ -91,9 +93,12 @@ print("UFO_load")
 		 while ufo.x>=arenaWidth-10 do
 		    ufo.x=math.random(0,arenaWidth)+displayWidth
 		 end
+         
+         ufo.life=ufo_life
+
 		 ufo.y=50
-	         ufo.width=ufo_width
-	         ufo.height=ufo_height
+         ufo.width=ufo_width
+         ufo.height=ufo_height
 		 ufo.velocity=100
 		 local temp=math.random(0,1)
 		 if temp<0.5 then
@@ -147,6 +152,29 @@ end
 
 
 function UFO_draw()
+     -- set ufo_level
+     ufo_level=math.floor(score/300+1)
+     ufo_life=ufo_life+ufo_level*5
+     ufo_num=ufo_num+ufo_level-1
+     if ufo_num>8 then
+        ufo_num=8
+     end
+
+
+    -- ufo level information
+    -- Draw the ufo label
+    local y=8
+    local margin=8
+    local guiFont=love.graphics.newFont("gui_font.ttf", 32)
+    love.graphics.setFont(guiFont)
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.print("UFO LEVEL:", margin, 0.4*arenaHeight)
+    y = 0.4*arenaHeight + guiFont:getHeight()
+
+    
+    love.graphics.print(tostring(ufo_level),margin,y)
+
+
 
 	 local r,g,b,alpha=love.graphics.getColor()
 	 -- draw ufos

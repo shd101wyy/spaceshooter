@@ -27,19 +27,21 @@ function LaserBeam:update(dt, dir)
     for i,v in ipairs(ufo_group) do
         if self.x+displayWidth>=ufo_group[i].x and self.x+displayWidth<=ufo_group[i].x+ufo_group[i].width and self.y<=ufo_group[i].y then
             
-                    print("Hit UFO"..i)
-                    
-            score=score+20
+            v.life=v.life-1
+            self:remove()
+            if v.life<=0 then
+                score=score+20
             
-            remove_ufo_num=remove_ufo_num+1
-            -- make ufo_group disappear
-            ufo_group[i].y=-1000
+                remove_ufo_num=remove_ufo_num+1
+                -- make ufo_group disappear
+                ufo_group[i].y=-1000
             
-            -- restore ufo
-            if remove_ufo_num>=ufo_num then
-                UFO_load()
-                remove_ufo_num=0
-                break
+                -- restore ufo
+                if remove_ufo_num>=ufo_num then
+                    UFO_load()
+                    remove_ufo_num=0
+                    break
+                end
             end
         end
     end
