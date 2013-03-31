@@ -56,19 +56,30 @@ table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrde
 --require "./UFO.lua"
 
 life={"*","*","*","*","*"}
-weapon_mode="laser"
+weapon_mode="simple laser"
 can_gg=false
-laser_level=2
-
+laser_level=1
+weapon_name = {"simple laser", "triple laser", "3-way laser"}
 
 function love.keypressed(key)
 	 if key=="tab" then
 	    print("Press Tab")
-	    if weapon_mode=="laser" then
-	       weapon_mode="bomb"
-	    else
-	       weapon_mode="laser"
-	    end
+        wm = weapon_mode
+        if laser_level == 2 then
+    	    if wm == "simple laser" then
+    	       wm = "triple laser"
+    	    else
+    	       wm = "simple laser"
+    	    end
+        elseif laser_level == 3 then
+            if wm == "simple laser" then
+                wm = "triple laser"
+            elseif wm == "triple laser" then
+                wm = "3-way laser"
+            else
+                wm = "simple laser"
+            end
+        end
 	 elseif key=="escape" then
 	 	os.exit()
 	 end
