@@ -66,6 +66,7 @@ function UFO_update(dt)
                 v.x=ufo_group[i].x
                 v.y=ufo_group[i].y
                 v.vx=0
+                
                 if i==1 then
                     ufo_have_shot=false
                 end

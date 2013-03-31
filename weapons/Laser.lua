@@ -28,6 +28,9 @@ function LaserBeam:update(dt, dir)
         if self.x+displayWidth>=ufo_group[i].x and self.x+displayWidth<=ufo_group[i].x+ufo_group[i].width and self.y<=ufo_group[i].y then
             
                     print("Hit UFO"..i)
+                    
+            score=score+20
+            
             remove_ufo_num=remove_ufo_num+1
             -- make ufo_group disappear
             ufo_group[i].y=-1000
