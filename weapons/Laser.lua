@@ -33,6 +33,7 @@ function LaserBeam:update(dt, dir)
             ufo_num=ufo_num-1
             if ufo_num<=0 then
                 ufo_num=4
+                break
             end
         end
     end
