@@ -59,25 +59,14 @@ life = {"*","*","*","*","*"}
 can_gg = false
 game_level = 1
 weapon_mode = 1 -- the # of weapon
-weapon_name = {"simple laser", "triple laser", "3-way laser"} -- output name for weapon
+weapon_name = {"simple laser", "triple laser", "3-way laser", "8-way layer"} -- output name for weapon
 
 function love.keypressed(key)
 	 if key=="tab" then
 	    print("Press Tab")
-        if game_level == 2 then
-    	    if weapon_mode == 1 then
-    	       weapon_mode = 2
-    	    else
-    	       weapon_mode = 1
-    	    end
-        elseif game_level == 3 then
-            if weapon_mode == 1 then
-                weapon_mode = 2
-            elseif weapon_mode == 2 then
-                weapon_mode = 3
-            else
-                weapon_mode = 1
-            end
+        weapon_mode = weapon_mode + 1
+        if weapon_mode > game_level then
+            weapon_mode = 1
         end
 	 elseif key=="escape" then
 	 	os.exit()
@@ -218,10 +207,12 @@ function love.draw()
  -- update laser according to score
     if score<=100 then
        game_level = 1
-    elseif score>100 and score<400 then
+    elseif score>100 and score<300 then
        game_level = 2
-    else
+    elseif score >= 300 and score < 800 then
        game_level = 3
+    else
+        game_level = 4
     end
 
  -- Draw the life label
