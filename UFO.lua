@@ -204,8 +204,8 @@ function UFO_draw()
      ufo_level=math.floor(score/200+1)
      ufo_life=5+ufo_level*5
      ufo_num=4+ufo_level-1
-     if ufo_num>8 then
-        ufo_num=8
+     if ufo_num>6 then
+        ufo_num=6
      end
     ufo_v_downward=20+(ufo_level-1)*20
     if ufo_v_downward>200 then
