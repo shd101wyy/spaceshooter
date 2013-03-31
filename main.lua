@@ -95,6 +95,9 @@ end
 
 function love.load()
 
+    -- load background
+    background = {}
+    background.image = love.graphics.newImage("background-1080x700.jpg")
 
     -- Load fonts
     debugFont = love.graphics.newFont(12)
@@ -158,7 +161,8 @@ end
 
 function love.draw()
 
-
+    -- draw background
+    love.graphics.draw(background.image,200,0)
 
     -- Draw all the actors
     love.graphics.push()
