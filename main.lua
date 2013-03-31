@@ -187,6 +187,13 @@ function love.draw()
     love.graphics.print(numberToString(score, 6), margin * 2, y + margin * 2)
     y = y + scoreFont:getHeight() + margin * 2
 
+    -- Draw the current Level
+    love.graphics.setFont(guiFont)
+    love.graphics.setColor(255, 255, 255, 255)
+    local lvlprint = "Level = " .. game_level
+    love.graphics.print(lvlprint, margin, y)
+    y = y + guiFont:getHeight()
+
     -- Draw the weapons label
     love.graphics.setFont(guiFont)
     love.graphics.setColor(255, 255, 255, 255)
@@ -200,13 +207,6 @@ function love.draw()
         love.graphics.print(weapon_name[i], margin, y)
         y = y + guiFont:getHeight()
     end
-
-    -- Draw the current Level
-    love.graphics.setFont(guiFont)
-    love.graphics.setColor(255, 255, 255, 255)
-    local lvlprint = "Level = " .. game_level
-    love.graphics.print(lvlprint, margin, y)
-    y = y + guiFont:getHeight()
 
  -- update laser according to score
     if score<=100 then

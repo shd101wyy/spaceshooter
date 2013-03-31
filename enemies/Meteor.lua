@@ -51,7 +51,7 @@ end
 
 function MeteorClass:update(dt)
     -- Random chance that a new meteor appears.
-    if math.random() < 0.01 then
+    if math.random() < 0.02 then
         local newMeteor = makeMeteor()
         self.spriteGroup:addSprite(newMeteor)
         addTarget(newMeteor)
