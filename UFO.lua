@@ -55,9 +55,15 @@ function UFO_update(dt)
 	        end	     
 	     end
          
+        print("player")
+        print(player.x)
+        print(player.y)
+
          -- check collision
         for i,v in ipairs(bullets) do
-            if v.x+5>player.x and v.x+v.width<player.x+player.width and v.y>=player.y then
+            print(v.x)
+            print(v.y)
+            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y then
                 print("HIT")
                 v.x=ufo_group[i].x
                 v.y=ufo_group[i].y
