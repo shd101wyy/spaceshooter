@@ -242,7 +242,8 @@ function love.draw()
     if can_gg==true then
     
        -- reset laser level
-       game_level=1
+       game_level = 1
+       weapon_mode = 1
 	
        print("GAME OVER")
        love.graphics.setFont(guiFont)
