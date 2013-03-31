@@ -203,7 +203,11 @@ function love.draw()
     -- Draw the weapon class labels
     love.graphics.setFont(guiFont)
     for i = 1, game_level do
-        love.graphics.setColor(255, 255, 255, 255)
+        if weapon_mode == i then
+            love.graphics.setColor(0, 255, 0, 255)
+        else
+            love.graphics.setColor(255, 255, 255, 255)
+        end
         love.graphics.print(weapon_name[i], margin, y)
         y = y + guiFont:getHeight()
     end
