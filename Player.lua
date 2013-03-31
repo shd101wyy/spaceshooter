@@ -17,7 +17,7 @@ Player = class(Actor,
 local kd = love.keyboard.isDown
 function Player:update(dt)
     -- Check movement keys
-    if kd("a") then
+    if kd("left") then
         self.x = self.x - self.moveSpeed * dt
         self.targetTiltAngle = -45
 
@@ -25,13 +25,29 @@ function Player:update(dt)
         if self.x - self.width / 2 < 0 then
             self.x = self.width / 2
         end
-    elseif kd("d") then
+    elseif kd("right") then
         self.x = self.x + self.moveSpeed * dt
         self.targetTiltAngle = 45
 
         -- Ensure we don't fall off the screen
         if self.x + self.width / 2 > arenaWidth then
             self.x = arenaWidth - self.width / 2
+        end
+    elseif kd("up") then
+        self.y = self.y - self.moveSpeed * dt
+        self.targetTiltAngle = -45
+
+        -- Ensure we don't fall off the screen
+        if self.y - self.height / 2 < 0 then
+            self.y = self.height / 2
+        end
+    elseif kd("down") then
+        self.y = self.y + self.moveSpeed * dt
+        self.targetTiltAngle = 45
+
+        -- Ensure we don't fall off the screen
+        if self.y + self.height / 2 > arenaHeight then
+            self.y = arenaHeight - self.height / 2
         end
     else
         self.targetTiltAngle = 0

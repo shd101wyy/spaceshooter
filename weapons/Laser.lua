@@ -77,7 +77,7 @@ LaserClass.fireRate = 0.05
 local kd = love.keyboard.isDown -- A small shortcut to this crucial functino
 
 function LaserClass:update(dt)
-    if kd("w") then
+    if kd(" ") then
         self.cooloff = self.cooloff + dt
         while self.cooloff >= 0 do
             if weapon_mode == 1 then -- level 1: Original single straight beam
