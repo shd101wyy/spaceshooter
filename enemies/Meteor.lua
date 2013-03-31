@@ -30,11 +30,18 @@ end
 
 local function makeMeteor()
     local meteor = {}
-    meteor.health = 10
+    local ll = laser_level -- convenient name
+    if ll == 1 then
+        meteor.health = 10 -- relatively easy
+    elseif ll == 2 then
+        meteor.health = 15 -- moderate
+    else
+        meteor.health = 20 -- more difficult
+    end
     meteor.y = -64
     meteor.x = math.random(0, arenaWidth)
     meteor.vel_x = 0
-    meteor.vel_y = 250 + math.random(-50, 50)
+    meteor.vel_y = 150 + 75 * laser_level + math.random(-50, 50) -- faster for higher level
     meteor.time = math.random(0, 99)
     meteor.frameRate = math.random(24, 100)
     meteor.getBB = meteorGetBB
