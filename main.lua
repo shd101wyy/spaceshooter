@@ -125,6 +125,8 @@ function love.load()
     audioSource:setLooping(true)
     love.audio.play(audioSource)
 
+    shootAudio = love.audio.newSource("shoot.mp3")
+
      -- new code here by PODH
 
       UFO_load()
@@ -244,8 +246,13 @@ function love.draw()
     	life_string=life_string..v.." "
     end
     love.graphics.print(life_string,margin,y)
-    finalY = y + 2 * guiFont:getHeight()
+    y = y + 2*guiFont:getHeight()
+    --finalY = y + 2 * guiFont:getHeight()
+    
+    love.graphics.print("space->shoot\nUp->up\nDown->down\nLeft->left\nright->right\n", margin, y)
+    finalY = y + 6 * guiFont:getHeight()
 
+    
 
     -- check gg
     if can_gg==true then
