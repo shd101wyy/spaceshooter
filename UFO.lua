@@ -100,10 +100,10 @@ function UFO_update(dt)
 end
 
 function UFO_load()
-print("UFO_load")
-	 ufo_group={}
 
-	
+    print("UFO NUM")
+    print(ufo_num)
+	 ufo_group={}
 	 ufo_width=30
 	 ufo_height=10
 	 for i=1,ufo_num do
@@ -127,7 +127,7 @@ print("UFO_load")
 	 end
 	 
 	 bullets={}
-	 for i=1,#ufo_group do
+	 for i=1,ufo_num do
 	     bullet={}
 	     bullet.x=ufo_group[i].x+ufo_width/2
 	     bullet.y=ufo_group[i].y+ufo_height
