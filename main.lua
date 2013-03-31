@@ -234,6 +234,7 @@ function love.draw()
     	life_string=life_string..v.." "
     end
     love.graphics.print(life_string,margin,y)
+    finalY = y + 2 * guiFont:getHeight()
 
 
     -- check gg
