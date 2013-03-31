@@ -1,3 +1,6 @@
+ufo_num=4
+ufo_have_shot=false
+
 
 function UFO_update(dt)
 	 for i,v in ipairs(ufo_group) do
@@ -11,6 +14,46 @@ function UFO_update(dt)
 		 v.x=v.x+10
 	     end
 	 end
+
+
+	 local x2,y2=player.x,player.y
+	 -- update bullets
+	 for i,v in ipairs(bullets) do
+
+	 
+	     --aim ship
+	     if i==1 then
+	     -- have not shot
+	       if ufo_have_shot==false then
+	        	local x1=v.x
+			local y1=v.y
+			v.vx=(x2-x1)/(y2-y1)*v.vy*1.0
+		       ufo_have_shot=true
+	       -- have shot	
+	       else
+			v.x=v.x+v.vx*dt
+			v.y=v.y+v.vy*dt
+		
+			-- bullet outside windows
+			if v.y>=arenaHeight or v.x<displayWidth or v.x>arenaWidth then
+		   	v.x=ufo_group[i].x
+		   	v.y=ufo_group[i].y
+		   	v.vx=0
+		   	ufo_have_shot=false
+		end
+		
+	     end
+	     
+	     -dont aim ship
+	     else
+		v.x=v.x+v.vx*dt
+		v.y=v.y+v.vy*dt
+		-- bullet outside windows
+		if v.y>=arenaHeight or v.x<displayWidth or v.x>arenaWidth then
+		   	v.x=ufo_group[i].x
+		   	v.y=ufo_group[i].y	   	
+	        end	     
+	 end
 end
 
 function UFO_load()
@@ -19,7 +62,7 @@ function UFO_load()
 	
 	 ufo_width=30
 	 ufo_height=10
-	 for i=1,4 do
+	 for i=1,ufo_num do
 	     	 ufo={}
         	 ufo.x=math.random(0,arenaWidth)+displayWidth
 		 while ufo.x>=arenaWidth-10 do
@@ -35,6 +78,21 @@ function UFO_load()
 		 end
 		 table.insert(ufo_group,ufo)
 	 end
+	 
+	 bullets={}
+	 for i=1,#ufo_group do
+	     bullet={}
+	     bullet.x=ufo_group[i].x+ufo_width/2
+	     bullet.y=ufo_group[i].y+ufo_height
+	     bullet.width=5
+	     bullet.height=5
+	     bullet.vx=100
+	     bullet.vy=200
+	     table.insert(bullets,bullet)
+	 end
+
+	 
+	 
 end
 
 function love.graphics.ellipse(mode, x, y, a, b, phi, points)
@@ -63,7 +121,13 @@ function love.graphics.ellipse(mode, x, y, a, b, phi, points)
   love.graphics.polygon(mode, coords)
 end
 
+
+
+
 function UFO_draw()
+
+	 local r,g,b,alpha=love.graphics.getColor()
+	 -- draw ufos
 	 for i,v in ipairs(ufo_group) do
 
 	      love.graphics.setColor(126,161,181,255)
@@ -73,4 +137,12 @@ function UFO_draw()
 	      
 	 end
 
+	 -- draw bullets
+	 for i,v in ipairs(bullets) do
+	     print("bullet")
+	     print(i)
+	     love.graphics.setColor(255,10,10,255)
+	     love.graphics.circle("fill",v.x,v.y,10)
+	 end
+	 love.graphics.setColor(r,g,b,alpha)
 end

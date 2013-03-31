@@ -125,7 +125,7 @@ end
 function love.update(dt)
 
     -- new code by PODH
-    if score>=200 then
+    if score>=20 then
        UFO_update(dt)
     end
     -------------------
@@ -261,7 +261,7 @@ function love.draw()
 
 
       -- new code here by PODH
-    if score>=200 then
+    if score>=20 then
       UFO_draw()
     end
     ------------------------
