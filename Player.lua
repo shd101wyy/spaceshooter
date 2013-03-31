@@ -33,7 +33,12 @@ function Player:update(dt)
         if self.x + self.width / 2 > arenaWidth then
             self.x = arenaWidth - self.width / 2
         end
-    elseif kd("up") then
+    else
+        self.targetTiltAngle = 0
+    end
+
+    -- add movement to go up and down
+    if kd("up") then
         self.y = self.y - self.moveSpeed * dt
         self.targetTiltAngle = -45
 

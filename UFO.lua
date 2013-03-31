@@ -72,6 +72,8 @@ function UFO_update(dt)
             end
             
             -- ufo height
+            
+
             if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y and v.y<=player.y+player.height*0.6 then
                 print("UFO")
                 table.remove(life,#life)
@@ -244,6 +246,7 @@ function UFO_draw()
 	      love.graphics.ellipse( "fill", v.x+10, v.y-10, v.width/2,v.height/2,10,100)
 	      love.graphics.setColor(219,219,219,255)
 	      love.graphics.ellipse( "fill", v.x, v.y, v.width,v.height,10,100)
+          
 	      
 	 end
 
@@ -253,4 +256,18 @@ function UFO_draw()
 	     love.graphics.circle("fill",v.x,v.y,v.width)
 	 end
 	 love.graphics.setColor(r,g,b,alpha)
+
+
+
 end
+
+
+
+
+
+
+
+
+
+
+
