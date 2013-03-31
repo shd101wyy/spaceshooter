@@ -35,25 +35,25 @@ function UFO_update(dt)
 			v.y=v.y+v.vy*dt
 		
 			-- bullet outside windows
-			if v.y>=arenaHeight or v.x<displayWidth or v.x>arenaWidth then
-		   	v.x=ufo_group[i].x
-		   	v.y=ufo_group[i].y
-		   	v.vx=0
-		   	ufo_have_shot=false
-		end
-		
-	     end
+			if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
+		   	   v.x=ufo_group[i].x
+				v.y=ufo_group[i].y
+				v.vx=0
+				ufo_have_shot=false
+		 	end
+	     	end
 	     
-	     -dont aim ship
+	     --dont aim ship
 	     else
 		v.x=v.x+v.vx*dt
 		v.y=v.y+v.vy*dt
 		-- bullet outside windows
-		if v.y>=arenaHeight or v.x<displayWidth or v.x>arenaWidth then
+		if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
 		   	v.x=ufo_group[i].x
 		   	v.y=ufo_group[i].y	   	
 	        end	     
-	 end
+	     end
+      end
 end
 
 function UFO_load()
