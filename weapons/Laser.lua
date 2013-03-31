@@ -75,6 +75,7 @@ function LaserClass:update(dt)
     if kd("w") then
         self.cooloff = self.cooloff + dt
         while self.cooloff >= 0 do
+            print("weapon_mode: " .. weapon_mode)
             if weapon_mode == 1 then -- level 1: Original single straight beam
                 local laser = LaserBeam(player.x, player.y, 0)
                 addActor(laser)

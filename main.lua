@@ -211,13 +211,10 @@ function love.draw()
  -- update laser according to score
     if score<=100 then
        game_level = 1
-       weapon_mode = 1
     elseif score>100 and score<400 then
        game_level = 2
-       weapon_mode = 2
     else
        game_level = 3
-       weapon_mode = 3
     end
 
  -- Draw the life label
