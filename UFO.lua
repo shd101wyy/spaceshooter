@@ -5,7 +5,29 @@ ufo_can_move_down=false
 ufo_have_shot=false
 ufo_life=30
 ufo_level=1
+ufo_v_downward=20
 
+-- init one ufo
+function ONE_UFO_load(ufo_index)
+ 	 ufo={}
+     ufo.x=math.random(0,arenaWidth)+displayWidth
+     while ufo.x>=arenaWidth-10 do
+		    ufo.x=math.random(0,arenaWidth)+displayWidth
+     end
+         
+     ufo.life=ufo_life
+    
+		 ufo.y=50
+         ufo.width=ufo_width
+         ufo.height=ufo_height
+		 ufo.velocity=100
+         ufo.downward_velocity=ufo_v_downward
+		 local temp=math.random(0,1)
+		 if temp<0.5 then
+		    ufo.velocity=-1*ufo.velocity
+		 end
+         ufo_group[ufo_index]=ufo
+end
 
 function UFO_update(dt)
      -- update UFO
@@ -25,7 +47,7 @@ function UFO_update(dt)
      else
          for i,v in ipairs(ufo_group) do
             v.x=v.x+dt*v.velocity*math.random(1,2)
-            v.y=v.y+dt*150
+            v.y=v.y+dt*v.downward_velocity
             if v.x>=arenaWidth then
                 v.velocity=-v.velocity
                 v.x=v.x-10
@@ -37,8 +59,16 @@ function UFO_update(dt)
             if v.y>=arenaHeight then
                 v.y=0
             end
+            
+            -- ufo height
+            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y then
+                print("UFO")
+                table.remove(life,#life)
+            end
+
         end
      end
+     
 
 
 	 local x2,y2=player.x,player.y
@@ -101,8 +131,6 @@ end
 
 function UFO_load()
 
-    print("UFO NUM")
-    print(ufo_num)
 	 ufo_group={}
 	 ufo_width=30
 	 ufo_height=10
@@ -114,11 +142,12 @@ function UFO_load()
 		 end
          
          ufo.life=ufo_life
-
+    
 		 ufo.y=50
          ufo.width=ufo_width
          ufo.height=ufo_height
 		 ufo.velocity=100
+         ufo.downward_velocity=ufo_v_downward
 		 local temp=math.random(0,1)
 		 if temp<0.5 then
 		    ufo.velocity=-1*ufo.velocity
@@ -178,7 +207,10 @@ function UFO_draw()
      if ufo_num>8 then
         ufo_num=8
      end
-
+    ufo_v_downward=20+(ufo_level-1)*20
+    if ufo_v_downward>200 then
+        ufo_v_downward=200
+    end
 
     -- ufo level information
     -- Draw the ufo label
