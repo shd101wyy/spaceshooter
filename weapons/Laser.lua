@@ -23,25 +23,25 @@ function LaserBeam:update(dt, dir)
         self:remove()
     end
     
-    removeUFO={}
     -- check attack UFO
     for i,v in ipairs(ufo_group) do
         if self.x+displayWidth>=ufo_group[i].x and self.x+displayWidth<=ufo_group[i].x+ufo_group[i].width and self.y<=ufo_group[i].y then
-        
-            print("HIT UFO")
-            table.insert(removeUFO,i)
-            ufo_num=ufo_num-1
-            if ufo_num<=0 then
-                ufo_num=4
+            
+                    print("Hit UFO"..i)
+            remove_ufo_num=remove_ufo_num+1
+            -- make ufo_group disappear
+            ufo_group[i].y=-1000
+            
+            -- restore ufo
+            if remove_ufo_num>=ufo_num then
+                UFO_load()
+                remove_ufo_num=0
                 break
             end
         end
     end
-    
-    -- remove UFO
-    for i,v in ipairs(removeUFO) do
-        table.remove(ufo_group,i)
-    end
+
+
 end
 
 function  LaserBeam:draw()

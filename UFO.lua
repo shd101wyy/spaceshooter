@@ -1,4 +1,5 @@
 ufo_num=4
+remove_ufo_num=0
 max_ufo_num=8
 ufo_can_move_down=false
 ufo_have_shot=false
@@ -77,6 +78,7 @@ function UFO_update(dt)
 end
 
 function UFO_load()
+print("UFO_load")
 	 ufo_group={}
 
 	
