@@ -32,14 +32,14 @@ function LaserBeam:update(dt, dir)
             if v.life<=0 then
                 score=score+20
             
-                remove_ufo_num=remove_ufo_num+1
+                remove_ufo_num=remove_ufo_num-1
                 -- make ufo_group disappear
                 ufo_group[i].y=-1000
             
                 -- restore ufo
-                if remove_ufo_num>=ufo_num then
+                if remove_ufo_num<=0 then
                     UFO_load()
-                    remove_ufo_num=0
+                    remove_ufo_num=ufo_num
                     break
                 end
             end

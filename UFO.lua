@@ -1,5 +1,5 @@
 ufo_num=4
-remove_ufo_num=0
+remove_ufo_num=4
 max_ufo_num=8
 ufo_can_move_down=false
 ufo_have_shot=false
@@ -25,16 +25,16 @@ function UFO_update(dt)
      else
          for i,v in ipairs(ufo_group) do
             v.x=v.x+dt*v.velocity*math.random(1,2)
+            v.y=v.y+dt*150
             if v.x>=arenaWidth then
                 v.velocity=-v.velocity
                 v.x=v.x-10
-                v.y=v.y+100*dt
             end
             if v.x<=displayWidth then
                 v.velocity=-v.velocity
                 v.x=v.x+10
             end
-            if v.y<=arenaHeight then
+            if v.y>=arenaHeight then
                 v.y=0
             end
         end
@@ -173,7 +173,7 @@ end
 function UFO_draw()
      -- set ufo_level
      ufo_level=math.floor(score/200+1)
-     ufo_life=20+ufo_level*5
+     ufo_life=5+ufo_level*5
      ufo_num=4+ufo_level-1
      if ufo_num>8 then
         ufo_num=8
@@ -187,8 +187,8 @@ function UFO_draw()
     local guiFont=love.graphics.newFont("gui_font.ttf", 32)
     love.graphics.setFont(guiFont)
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.print("UFO LEVEL:", margin, 0.4*arenaHeight)
-    y = 0.4*arenaHeight + guiFont:getHeight()
+    love.graphics.print("UFO LEVEL:", margin, finalY)
+    y = finalY + guiFont:getHeight()
 
     
     love.graphics.print(tostring(ufo_level),margin,y)
