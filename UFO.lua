@@ -9,6 +9,7 @@ ufo_v_downward=20
 
 -- init one ufo
 function ONE_UFO_load(ufo_index)
+     
  	 ufo={}
      ufo.x=math.random(0,arenaWidth)+displayWidth
      while ufo.x>=arenaWidth-10 do
@@ -26,11 +27,18 @@ function ONE_UFO_load(ufo_index)
 		 if temp<0.5 then
 		    ufo.velocity=-1*ufo.velocity
 		 end
-         ufo_group[ufo_index]=ufo
+         if ufo_index>ufo_num then
+            table.insert(ufo_group,ufo)
+         else
+            ufo_group[ufo_index]=ufo
+         end
 end
 
 function UFO_update(dt)
      -- update UFO
+     if ufo_num>6 then
+        ufo_num=6
+     end
      if ufo_level<=4 then
         for i,v in ipairs(ufo_group) do
             v.x=v.x+dt*v.velocity*math.random(1,2)
@@ -204,9 +212,7 @@ function UFO_draw()
      ufo_level=math.floor(score/200+1)
      ufo_life=5+ufo_level*5
      ufo_num=4+ufo_level-1
-     if ufo_num>6 then
-        ufo_num=6
-     end
+     
     ufo_v_downward=20+(ufo_level-1)*20
     if ufo_v_downward>200 then
         ufo_v_downward=200
