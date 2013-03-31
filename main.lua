@@ -64,20 +64,19 @@ weapon_name = {"simple laser", "triple laser", "3-way laser"} -- output name for
 function love.keypressed(key)
 	 if key=="tab" then
 	    print("Press Tab")
-        wm = weapon_mode
         if game_level == 2 then
-    	    if wm == 1 then
-    	       wm = 2
+    	    if weapon_mode == 1 then
+    	       weapon_mode = 2
     	    else
-    	       wm = 1
+    	       weapon_mode = 1
     	    end
         elseif game_level == 3 then
-            if wm == 1 then
-                wm = 2
-            elseif wm == 2 then
-                wm = 3
+            if weapon_mode == 1 then
+                weapon_mode = 2
+            elseif weapon_mode == 2 then
+                weapon_mode = 3
             else
-                wm = 1
+                weapon_mode = 1
             end
         end
 	 elseif key=="escape" then
@@ -196,13 +195,18 @@ function love.draw()
 
     -- Draw the weapon class labels
     love.graphics.setFont(guiFont)
-    for _,weapon in ipairs(weaponClasses) do
-        local c = weapon.weaponColor
-        love.graphics.setColor(c[1], c[2], c[3], 255)
-        love.graphics.print(weapon.weaponName, margin, y)
+    for i = 1, game_level do
+        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.print(weapon_name[i], margin, y)
         y = y + guiFont:getHeight()
     end
 
+    -- Draw the current Level
+    love.graphics.setFont(guiFont)
+    love.graphics.setColor(255, 255, 255, 255)
+    local lvlprint = "Level = " .. game_level
+    love.graphics.print(lvlprint, margin, y)
+    y = y + guiFont:getHeight()
 
  -- update laser according to score
     if score<=100 then
