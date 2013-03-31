@@ -9,6 +9,9 @@ ufo_v_downward=20
 
 -- init one ufo
 function ONE_UFO_load(ufo_index)
+     if ufo_num>6 then
+        ufo_num=6
+     end
      
  	 ufo={}
      ufo.x=math.random(0,arenaWidth)+displayWidth
@@ -69,7 +72,7 @@ function UFO_update(dt)
             end
             
             -- ufo height
-            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y then
+            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y and v.y<=player.y+player.height*0.6 then
                 print("UFO")
                 table.remove(life,#life)
             end
@@ -120,7 +123,7 @@ function UFO_update(dt)
          -- check collision
         for i,v in ipairs(bullets) do
            
-            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y then
+            if v.x+v.width/2>=player.x+displayWidth and v.x+v.width/2<=player.x+player.width+displayWidth and v.y>=player.y and v.y<=player.y+player.height*0.6 then
                 print("HIT")
                 v.x=ufo_group[i].x
                 v.y=ufo_group[i].y
