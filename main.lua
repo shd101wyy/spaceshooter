@@ -55,29 +55,29 @@ table.sort(weaponClasses, function(w1, w2) return w1.weaponOrder < w2.weaponOrde
 --======================================
 --require "./UFO.lua"
 
-life={"*","*","*","*","*"}
-weapon_mode="simple laser"
-can_gg=false
-laser_level=1
-weapon_name = {"simple laser", "triple laser", "3-way laser"}
+life = {"*","*","*","*","*"}
+can_gg = false
+game_level = 1
+weapon_mode = 1 -- the # of weapon
+weapon_name = {"simple laser", "triple laser", "3-way laser"} -- output name for weapon
 
 function love.keypressed(key)
 	 if key=="tab" then
 	    print("Press Tab")
         wm = weapon_mode
-        if laser_level == 2 then
-    	    if wm == "simple laser" then
-    	       wm = "triple laser"
+        if game_level == 2 then
+    	    if wm == 1 then
+    	       wm = 2
     	    else
-    	       wm = "simple laser"
+    	       wm = 1
     	    end
-        elseif laser_level == 3 then
-            if wm == "simple laser" then
-                wm = "triple laser"
-            elseif wm == "triple laser" then
-                wm = "3-way laser"
+        elseif game_level == 3 then
+            if wm == 1 then
+                wm = 2
+            elseif wm == 2 then
+                wm = 3
             else
-                wm = "simple laser"
+                wm = 1
             end
         end
 	 elseif key=="escape" then
@@ -87,7 +87,7 @@ function love.keypressed(key)
 	 if can_gg==true and key=="y" then
 	    can_gg=false
 	    score=0
-	    laser_level=1
+	    game_level=1
 	    life={"*","*","*","*","*"}
 	 end
 end
@@ -206,11 +206,14 @@ function love.draw()
 
  -- update laser according to score
     if score<=100 then
-       laser_level=1
+       game_level = 1
+       weapon_mode = 1
     elseif score>100 and score<400 then
-       laser_level=2
+       game_level = 2
+       weapon_mode = 2
     else
-       laser_level=3
+       game_level = 3
+       weapon_mode = 3
     end
 
  -- Draw the life label
@@ -233,7 +236,7 @@ function love.draw()
     if can_gg==true then
     
        -- reset laser level
-       laser_level=1
+       game_level=1
 	
        print("GAME OVER")
        love.graphics.setFont(guiFont)
