@@ -77,6 +77,17 @@ function love.keypressed(key)
 	    score=0
 	    game_level=1
 	    life={"*","*","*","*","*"}
+        
+        -- reset ufo
+        ufo_num=4
+        remove_ufo_num=4
+        max_ufo_num=8
+        ufo_can_move_down=false
+        ufo_have_shot=false
+        ufo_life=30
+        ufo_level=1
+        ufo_v_downward=20
+        ----------------
 	 end
 end
 
