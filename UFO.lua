@@ -9,17 +9,36 @@ ufo_level=1
 
 function UFO_update(dt)
      -- update UFO
-	 for i,v in ipairs(ufo_group) do
-	     v.x=v.x+dt*v.velocity*math.random(1,2)
-	     if v.x>=arenaWidth then
-	         v.velocity=-v.velocity
-		     v.x=v.x-10
-	     end
-	     if v.x<=displayWidth then
-	         v.velocity=-v.velocity
-		     v.x=v.x+10
-	     end
-	 end
+     if ufo_level<=4 then
+        for i,v in ipairs(ufo_group) do
+            v.x=v.x+dt*v.velocity*math.random(1,2)
+            if v.x>=arenaWidth then
+                v.velocity=-v.velocity
+                v.x=v.x-10
+            end
+            if v.x<=displayWidth then
+                v.velocity=-v.velocity
+                v.x=v.x+10
+            end
+        end
+     -- ufo begin to move down
+     else
+         for i,v in ipairs(ufo_group) do
+            v.x=v.x+dt*v.velocity*math.random(1,2)
+            if v.x>=arenaWidth then
+                v.velocity=-v.velocity
+                v.x=v.x-10
+                v.y=v.y+100*dt
+            end
+            if v.x<=displayWidth then
+                v.velocity=-v.velocity
+                v.x=v.x+10
+            end
+            if v.y<=arenaHeight then
+                v.y=0
+            end
+        end
+     end
 
 
 	 local x2,y2=player.x,player.y
@@ -153,9 +172,9 @@ end
 
 function UFO_draw()
      -- set ufo_level
-     ufo_level=math.floor(score/300+1)
-     ufo_life=ufo_life+ufo_level*5
-     ufo_num=ufo_num+ufo_level-1
+     ufo_level=math.floor(score/200+1)
+     ufo_life=20+ufo_level*5
+     ufo_num=4+ufo_level-1
      if ufo_num>8 then
         ufo_num=8
      end
