@@ -3,15 +3,16 @@ ufo_have_shot=false
 
 
 function UFO_update(dt)
+     -- update UFO
 	 for i,v in ipairs(ufo_group) do
 	     v.x=v.x+dt*v.velocity*math.random(1,2)
 	     if v.x>=arenaWidth then
 	         v.velocity=-v.velocity
-		 v.x=v.x-10
+		     v.x=v.x-10
 	     end
 	     if v.x<=displayWidth then
 	         v.velocity=-v.velocity
-		 v.x=v.x+10
+		     v.x=v.x+10
 	     end
 	 end
 
@@ -26,33 +27,49 @@ function UFO_update(dt)
 	     -- have not shot
 	       if ufo_have_shot==false then
 	        	local x1=v.x
-			local y1=v.y
-			v.vx=(x2-x1)/(y2-y1)*v.vy*1.0
-		       ufo_have_shot=true
+			    local y1=v.y
+			    v.vx=(x2-x1)/(y2-y1)*v.vy*1.0
+		        ufo_have_shot=true
 	       -- have shot	
 	       else
-			v.x=v.x+v.vx*dt
-			v.y=v.y+v.vy*dt
+			    v.x=v.x+v.vx*dt
+			    v.y=v.y+v.vy*dt
 		
-			-- bullet outside windows
-			if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
-		   	   v.x=ufo_group[i].x
-				v.y=ufo_group[i].y
-				v.vx=0
-				ufo_have_shot=false
-		 	end
-	     	end
+			    -- bullet outside windows
+		    	if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
+		   	       v.x=ufo_group[i].x
+			       v.y=ufo_group[i].y
+		           v.vx=0
+			       ufo_have_shot=false
+		    	end
+           end
 	     
 	     --dont aim ship
 	     else
-		v.x=v.x+v.vx*dt
-		v.y=v.y+v.vy*dt
-		-- bullet outside windows
-		if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
-		   	v.x=ufo_group[i].x
-		   	v.y=ufo_group[i].y	   	
+		    v.x=v.x+v.vx*dt
+		    v.y=v.y+v.vy*dt
+		    -- bullet outside windows
+		    if v.y>=arenaHeight or v.x<displayWidth or v.x>love.graphics.getWidth() then
+		     	v.x=ufo_group[i].x
+		    	v.y=ufo_group[i].y	   	
 	        end	     
 	     end
+         
+         -- check collision
+        for i,v in ipairs(bullets) do
+            if v.x+5>player.x and v.x+v.width<player.x+player.width and v.y>=player.y then
+                print("HIT")
+                v.x=ufo_group[i].x
+                v.y=ufo_group[i].y
+                v.vx=0
+                if i==1 then
+                    ufo_have_shot=false
+                end
+                table.remove(life,#life)
+            end
+        end
+        
+
       end
 end
 
@@ -84,8 +101,7 @@ function UFO_load()
 	     bullet={}
 	     bullet.x=ufo_group[i].x+ufo_width/2
 	     bullet.y=ufo_group[i].y+ufo_height
-	     bullet.width=5
-	     bullet.height=5
+	     bullet.width=10
 	     bullet.vx=100
 	     bullet.vy=200
 	     table.insert(bullets,bullet)
@@ -139,10 +155,8 @@ function UFO_draw()
 
 	 -- draw bullets
 	 for i,v in ipairs(bullets) do
-	     print("bullet")
-	     print(i)
 	     love.graphics.setColor(255,10,10,255)
-	     love.graphics.circle("fill",v.x,v.y,10)
+	     love.graphics.circle("fill",v.x,v.y,v.width)
 	 end
 	 love.graphics.setColor(r,g,b,alpha)
 end
