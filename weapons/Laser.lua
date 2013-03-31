@@ -81,9 +81,12 @@ function LaserClass:update(dt)
         self.cooloff = self.cooloff + dt
         while self.cooloff >= 0 do
             if weapon_mode == 1 then -- level 1: Original single straight beam
-                local laser = LaserBeam(player.x, player.y, 0)
-                addActor(laser)
-                laser:update(self.cooloff)
+                local laser1 = LaserBeam(player.x, player.y, 0)
+                local laser2 = LaserBeam(player.x, player.y, 0)
+                addActor(laser1)
+                addActor(laser2)
+                laser1:update(self.cooloff)
+                laser2:update(self.cooloff)
             elseif weapon_mode == 2 then -- level 2: Three parallel beam
                 local laserM = LaserBeam(player.x, player.y, 0)
                 local laserL = LaserBeam(player.x - 30, player.y, 0)
