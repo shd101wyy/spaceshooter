@@ -92,7 +92,7 @@ function love.keypressed(key)
 end
 
 --======================================
-
+have_load_shoot_audio=false
 function love.load()
 
     -- load background
@@ -119,18 +119,16 @@ function love.load()
     addActor(player)
     addActor(weapon)
 
-    audioSource = love.audio.newSource("hdl.mp3")
+    local audioSource = love.audio.newSource("hdl.mp3")
     love.audio.setVolume(2.0)
     
     audioSource:setLooping(true)
     love.audio.play(audioSource)
 
-    shootAudio = love.audio.newSource("shoot.mp3")
-
      -- new code here by PODH
 
       UFO_load()
-    
+          
 
     -------------------------------------
 end

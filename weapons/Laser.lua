@@ -79,6 +79,7 @@ local kd = love.keyboard.isDown -- A small shortcut to this crucial functino
 function LaserClass:update(dt)
     if kd(" ") then
     
+         local shootAudio = love.audio.newSource("shoot.mp3")
 
         love.audio.setVolume(1.5)
         love.audio.play(shootAudio)
