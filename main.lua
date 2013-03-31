@@ -118,6 +118,7 @@ function love.load()
 
     audioSource = love.audio.newSource("hdl.mp3")
     love.audio.setVolume(2.0)
+    
     audioSource:setLooping(true)
     love.audio.play(audioSource)
 
@@ -133,6 +134,8 @@ end
 
 
 function love.update(dt)
+
+
 
     -- new code by PODH
     if score>=20 then
